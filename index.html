@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pizzaria Bella Massa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .flavors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+
+    <header role="banner">
+      <h1>Pizzaria Bella Massa</h1>
+      <p>Os melhores sabores de pizzas da cidade, direto para o seu lar!</p>
+    </header>
+
+    <nav role="navigation" aria-label="Menu principal">
+      <ul>
+        <li><a href="#sabores">Sabores</a></li>
+        <li><a href="#pedido">Faça seu Pedido</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <section id="sabores" aria-label="Galeria de Sabores de Pizza">
+      <h2>Sabores Disponíveis</h2>
+      <div class="flavors">
+        <article>
+          <img src="imagens/calabresa.jpg" alt="Pizza de calabresa">
+          <h3>Calabresa</h3>
+          <p>Calabresa, cebola, orégano e queijo.</p>
+          <p>Pequena: R$38,00  Média: R$50,00   Grande: R$60,00  Gicandte: R$80,00</p>
+        </article>
+        <article>
+          <img src="imagens/margherita.jpg" alt="Pizza Margherita">
+          <h3>Margherita</h3>
+          <p>Molho de tomate, mussarela, manjericão fresco.</p>
+          <p>Pequena: R$40,00	Média: R$55,00	Grande: R$70,00	Gigante: R$ 90,00</p>
+        </article>
+        <article>
+          <img src="imagens/portuguesa.jpg" alt="Pizza Portuguesa">
+          <h3>Portuguesa</h3>
+          <p>Presunto, ovo, ervilha, cebola, pimentão, queijo.</p>
+          <p>Pequena: R$30,00  Média: R$60,00  Grande: 70,00  Gigante: R$95,00</p>
+        </article>
+        <article>
+          <img src="imagens/quatroqueijos.jpg" alt="Pizza Quatro Queijos">
+          <h3>Quatro Queijos</h3>
+          <p>Mussarela, provolone, parmesão e gorgonzola.</p>
+          <p>Pequena: R$ 45,00	 Média: R$ 62,00	Grande: R$ 80,00   Gigante: R$ 90,00</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pedido" aria-label="Preencha e faça seu pedido de pizza">
+      <h2>Faça seu Pedido</h2>
+      <form onsubmit="return enviarPedidoWhatsApp()" aria-describedby="form-desc">
+        <p id="form-desc">Preencha os dados abaixo para que possamos entregar sua pizza com rapidez e segurança.</p>
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" aria-required="true">
+        <label for="endereco">Endereço de Entrega</label>
+        <input type="text" id="endereco" name="endereco" required placeholder="Rua, número, bairro" aria-required="true">
+        <label for="telefone">Telefone com WhatsApp</label>
+        <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX" aria-required="true">
+        <label for="sabor">Escolha seu sabor favorito</label>
+        <select id="sabor" name="sabor" required>
+          <option value="">-- Selecione --</option>
+          <option value="Calabresa">Calabresa</option>
+          <option value="Margherita">Margherita</option>
+          <option value="Portuguesa">Portuguesa</option>
+          <option value="Quatro Queijos">Quatro Queijos</option>
+        </select>
+        <label for="pagamento">Forma de Pagamento</label>
+        <select id="pagamento" name="pagamento" required>
+          <option value="">-- Escolha --</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+        <button type="submit">Enviar Pedido</button>
+      </form>
+    </section>
+
+    <section id="contato" aria-label="Informações de contato">
+      <h2>Contato</h2>
+      <p>📞 Telefone: (47) 12345-1234</p>
+      <p>📍 Endereço: Rua via gastronômica, 123 – Joinville/SC</p>
+      <p>⏰ Atendimento: todos os dias das 18h às 23h</p>
+    </section>
+
+    <footer role="contentinfo">
+      <p>&copy; 2025 Pizzaria Bella Massa – Sua Pizza preparada com amor e muito queijo 🧀</p>
+    </footer>
+
+  </main>
+
+  <script>
+    function enviarPedidoWhatsApp() {
+      const nome = document.getElementById("nome").value;
+      const endereco = document.getElementById("endereco").value;
+      const telefone = document.getElementById("telefone").value;
+      const sabor = document.getElementById("sabor").value;
+      const pagamento = document.getElementById("pagamento").value;
+    }
+      if (!nome || !endereco || !telefone || !sabor || !pagamento) {
+        alert("Por favor, preencha todos os campos.");
+        return false;
+      }
+      
+      const mensagem = `Olá! Meu nome é ${nome}. Gostaria de pedir uma pizza de ${sabor}.
+    Endereço: ${endereco}.
+    Forma de pagamento: ${pagamento}.
+    Aguardo confirmação neste número: ${telefone}.`;
+
+    const numeroWhatsApp = telefone.replace(/\D/g, '');
+    const link = `https://wa.me/55${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    window.open(link, "_blank");
+    return false;
